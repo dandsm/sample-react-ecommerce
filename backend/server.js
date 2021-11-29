@@ -3,7 +3,6 @@ import dotenv from 'dotenv'
 import colors from 'colors'
 import { notFound, errorHandler } from './middleware/errorMiddleWare.js'
 import connectDB from './data/dbContext.js'
-import products from './data/products.js'
 
 import productRoutes from './controllers/productRoutes.js'
 
