@@ -22,7 +22,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(`/${redirect}`)
+      navigate(redirect ? `/${redirect}` : '/')
     }
   }, [userInfo, navigate, redirect])
 
