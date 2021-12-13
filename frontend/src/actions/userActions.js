@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
+import { ORDER_LIST_MY_RESET } from '../constants/orderConstants'
 import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
@@ -13,6 +15,7 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
   USER_UPDATE_PROFILE_FAIL,
+  USER_DETAILS_RESET,
 } from '../constants/userContants'
 
 export const login = (email, password) => async (dispatch) => {
@@ -52,7 +55,13 @@ export const login = (email, password) => async (dispatch) => {
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo')
+  localStorage.removeItem('cartItems')
+  localStorage.removeItem('shippingAddress')
+  localStorage.removeItem('paymentMethod')
   dispatch({ type: USER_LOGOUT })
+  dispatch({ type: USER_DETAILS_RESET })
+  dispatch({ type: CART_CLEAR_ITEMS })
+  dispatch({ type: ORDER_LIST_MY_RESET })
   document.location.href = '/login'
 }
 
@@ -123,7 +132,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
-    if (message === 'Not authorized, token failed') {
+    if (error.response.status === 401) {
       dispatch(logout())
     }
     dispatch({

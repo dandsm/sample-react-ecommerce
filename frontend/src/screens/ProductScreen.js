@@ -8,7 +8,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 const ProductScreen = () => {
-  const { id } = useParams()
+  const { productId } = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -18,11 +18,11 @@ const ProductScreen = () => {
   const { loading, error, product } = productDetails
 
   useEffect(() => {
-    dispatch(listProductDetails(id))
-  }, [dispatch, id])
+    dispatch(listProductDetails(productId))
+  }, [dispatch, productId])
 
   const addToCartHandler = () => {
-    navigate(`/cart/${id}?qty=${qty}`, { replace: true })
+    navigate(`/cart/${productId}?qty=${qty}`, { replace: true })
   }
 
   return (
