@@ -143,7 +143,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
-    if (error.response.status === 401) {
+    if (message === 'Not authorized, token failed') {
       dispatch(logout())
     }
     dispatch({
@@ -186,7 +186,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message
-    if (error.response.status === 401) {
+    if (message === 'Not authorized, token failed') {
       dispatch(logout())
     }
     dispatch({
